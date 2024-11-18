@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import React, { ReactElement } from "react"
 
 interface ButtonInterface{
     size: "sm" | "md" | "lg",
@@ -7,6 +7,7 @@ interface ButtonInterface{
     title: String,
     variant:"primary" | "secondary"
 }
+
 
 const sizeStyles = {
     "lg": "px-8 py-4 text-xl rounded-xl",
@@ -19,15 +20,19 @@ const variantStyles = {
     "secondary": "bg-[#e0e7ff] text-purple-600",
 }
 
+export let size = "";
 
-export const Button = (props: ButtonInterface) =>{
-    return  <button className={sizeStyles[props.size] + " " + variantStyles[props.variant] }>
+export const Button = ({size, startIcon, endIcon, title, variant}: ButtonInterface) =>{
+    const startIconWithProps = startIcon ? React.cloneElement(startIcon, {size}) : null;
+    const endIconWithProps = endIcon ? React.cloneElement(endIcon, {size}) : null;
+
+    return  <button className={sizeStyles[size] + " " + variantStyles[variant] }>
     <div className="flex items-center">
-        {props.startIcon}
+        {startIconWithProps}
         <div className="pl-2 pr-2">
-            {props.title}
+            {title}
         </div>
-        {props.endIcon}
+        {endIconWithProps}
     </div>
 </button>
 }
