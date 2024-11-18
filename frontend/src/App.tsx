@@ -8,7 +8,7 @@ function App() {
  
 
   return (
-    <div className="flex">
+    <div className="flex text-gray-700">
    <Sidebar/>
       <div className="max-w-full w-full p-10">
         <div className="flex justify-between pb-5">
