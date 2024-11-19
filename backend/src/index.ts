@@ -8,9 +8,11 @@ import { contentModel, userModel } from "./db";
 import { JWT_PASSWORD } from "./config";
 import { userMiddleware } from "./middleware";
 import { contentSchema, userSchema } from "./zod";
+import cors from "cors"
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 app.post("/api/v1/signup", async (req, res) => {
     // TODO: zod validation , hash the password
@@ -32,6 +34,7 @@ app.post("/api/v1/signup", async (req, res) => {
             message: "User already exists"
         })
     }
+    
 })
 
 app.post("/api/v1/signin", async (req, res) => {
