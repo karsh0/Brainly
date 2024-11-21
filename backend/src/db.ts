@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose"
-import { string } from "zod"
+import { any, string } from "zod"
 
 mongoose.connect('mongodb+srv://admin:sdWrBsXuYHdxK3sb@cluster0.plktz.mongodb.net/Brainly')
 
@@ -15,6 +15,7 @@ const contentSchema = new Schema({
     type: {type: String },    
     title: String,
     content: String,
+    media: any,
     tags: [{type: Schema.ObjectId, ref: "Tag"}],
     userId: {type: Schema.ObjectId, ref:"User", required: true}
 })

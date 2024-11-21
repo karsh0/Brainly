@@ -6,6 +6,8 @@ export const userSchema = z.object({
 })
 
 export const contentSchema = z.object({
-    link: z.string(),
-    type: z.string()
+    type: z.string(),
+    title: z.string(),
+    content: z.string(),
+    media: z.any(),
 })

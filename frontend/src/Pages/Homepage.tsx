@@ -4,21 +4,14 @@ import { ShareIcon } from "../components/Icons/ShareIcon"
 import { Button } from "../components/ui/Button"
 import { Card } from "../components/ui/Card"
 import { Sidebar } from "../components/ui/Sidebar"
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
-import { AddContent } from "../components/ui/AddContent"
+import { Link } from "react-router-dom"
 
-// const [message, setMessage] = useState("")
- 
-// useEffect(()=>{
-//   fetch('http://localhost:3000/')
-//   .then((res) => res.json())
-//   .then((data) => setMessage(data.message))
-// },[])
 
-{/* <h1>{message}</h1> */}
 
 export const Homepage = () =>{
-    return     <div className="flex text-gray-700">
+
+
+  return     <div className="flex text-gray-700">
  <Sidebar/>
     <div className="max-w-full w-full p-10">
       <div className="flex justify-between pb-5">

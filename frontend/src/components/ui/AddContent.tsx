@@ -1,59 +1,54 @@
-import React, { useState } from 'react';
+import { useState } from "react"
+import { Sidebar } from "./Sidebar"
 
-export const AddContent = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+export const AddContent = () =>{
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [type, setType] = useState("")
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [media, setMedia] = useState("")
+  const [responseMessage, setResponseMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form default behavior
-
-    try {
-      const response = await fetch('http://localhost:3000/api/v1/signup', {
-        method: 'POST',
+  async function handleOnSubmit(e: any){
+    e.preventDefault();
+    try{
+      const res = await fetch("http://localhost:3000/api/v1/content", {
+        method:"POST",
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      },
+      body: JSON.stringify({ title,content }),
+  });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Response Data:', data);
-    } catch (error) {
-      console.error('Error during submission:', error);
-    }
-  };
-
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Add Content</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
+  const data = await res.json()
+  setResponseMessage(data.message);
+} catch (error) {
+    console.error('Error:', error);
+    setResponseMessage('Failed to send data.');
+}
 };
+
+  return <div className="flex text-gray-700">
+  <Sidebar/>
+     <div className="max-w-full w-full p-10">
+       <div className="flex flex-col gap-4 justify-between pb-5">
+         <h1 className="text-3xl text-bold">Add your content</h1>
+          <form action="" className="text-xl flex flex-col gap-3" onSubmit={handleOnSubmit}>
+          <div>
+            <span>Type: </span><select name="type" id="type" className="p-2 border-1 border-slate-600">
+            <option value={"Tweet"}>Tweet</option>
+            <option value={"Video"}>Video</option>
+            <option value={"Documents"}>Documents</option>
+            <option value={"Links"}>Links</option>
+            <option value={"Tags"}>Tags</option>
+            </select>
+            </div>
+            <div><span>Title: </span><input type="text" className="p-2 outline-1 " placeholder="Enter the title.." onChange={(e)=> setTitle(e.target.value)} /></div>
+            <div className="flex flex-col gap-2"><span>Content: </span><textarea className="p-2" name="content" rows={8} cols={30} placeholder="Enter the content.." onChange={(e)=> setContent(e.target.value)} /></div>
+            <div><span>Media: </span><input type="file" /></div>
+            <button type="submit">Submit</button>
+          </form>
+         </div>
+     </div>
+   </div>
+}
