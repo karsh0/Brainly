@@ -1,18 +1,36 @@
+import { ShareIcon } from "../Icons/ShareIcon"
+import { DocumentIcon } from "../Icons/DocumentIcon"
 
 interface CardInterface{
     title: String,
-    content: String,
-    tags?: [],
-    date: String
+    link: String,
+    type: "youtube" | "twitter",
 }
 
-export const Card = (props: CardInterface) => {
-    return <div className="w-fit max-w-72 p-3 rounded-md border-2 border-gray-200">
-        <h3 className="text-lg font-semibold">{props.title}</h3>
-        <p>{props.content}</p>
-        <p>{props.date}</p>
-    </div>
+export const Card = ({link, title, type}: CardInterface) => {
+    return(
+        <div>
+        <div className="max-w-72 rounded-xl border border-gray-300 p-2 min-h-48">
+            <div className="flex justify-between">
+                <div className="flex gap-2 items-center"> 
+                    <DocumentIcon/>
+                    <p className="text-xl text-md">{title}</p>
+                </div>
+                <div className="flex gap-2 items-center">
+                    <ShareIcon/>
+                    <ShareIcon/>
+                </div>
+            </div>
 
+            <div className="pt-4">
+                {type === "youtube" && <iframe className="w-full p-2"  src={link.replace("watch", "embed").replace("?v=","/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+                {type === "twitter" &&  <blockquote className="twitter-tweet">
+                  <a href={link.replace('x.com', 'twitter.com')}></a> 
+                </blockquote>}            
+            </div>
+        </div>
+        </div>
+    )
 }
 
 

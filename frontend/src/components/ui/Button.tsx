@@ -6,6 +6,7 @@ interface ButtonInterface{
     endIcon? : ReactElement,
     title: String,
     variant:"primary" | "secondary"
+    onClick?: () => void
 }
 
 
@@ -20,19 +21,16 @@ const variantStyles = {
     "secondary": "bg-[#e0e7ff] text-purple-600",
 }
 
-export let size = "";
 
-export const Button = ({size, startIcon, endIcon, title, variant}: ButtonInterface) =>{
+export const Button = ({size, startIcon, title, variant, onClick}: ButtonInterface) =>{
     const startIconWithProps = startIcon ? React.cloneElement(startIcon, {size}) : null;
-    const endIconWithProps = endIcon ? React.cloneElement(endIcon, {size}) : null;
 
-    return  <button className={sizeStyles[size] + " " + variantStyles[variant] }>
+    return  <button onClick={onClick} className={sizeStyles[size] + " " + variantStyles[variant] }>
     <div className="flex items-center">
         {startIconWithProps}
         <div className="pl-2 pr-2">
             {title}
         </div>
-        {endIconWithProps}
     </div>
 </button>
 }
