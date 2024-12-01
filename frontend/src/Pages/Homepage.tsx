@@ -5,6 +5,7 @@ import { Button } from "../components/ui/Button"
 import { Card } from "../components/ui/Card"
 import { Sidebar } from "../components/ui/Sidebar"
 import { Link } from "react-router-dom"
+import {CreateContentModal} from "./CreateContentModal"
 
 
 
@@ -12,6 +13,7 @@ export const Homepage = () =>{
 
 
   return     <div className="flex text-gray-700">
+ <CreateContentModal open={true} />
  <Sidebar/>
     <div className="max-w-full w-full p-10">
       <div className="flex justify-between pb-5">
@@ -19,7 +21,7 @@ export const Homepage = () =>{
         <div className="flex gap-2">
         <Button startIcon={<ShareIcon />} size="md" title={"Share brain"} variant={"secondary"}/>
 
-        <Link to={"/addcontent"}><Button startIcon={<PlusIcon />} size="md" title={"Add content"} variant={"primary"}/></Link>
+        <Button startIcon={<PlusIcon />} size="md" title={"Add content"} variant={"primary"}/>
         </div>
         </div>
         <Card title={"Productivity"} content={"this card talks about productivity this card talks about productivity this card talks about productivity"} date={"17/11/24"} />

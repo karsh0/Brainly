@@ -3,6 +3,14 @@ import jwt from "jsonwebtoken";
 
 import { JWT_PASSWORD } from "./config";
 
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string; // Make it optional if it's not always present
+    }
+  }
+}
+
 export const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const header = req.headers["authorization"];
     const decoded = jwt.verify(header as string, JWT_PASSWORD)
