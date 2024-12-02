@@ -99,12 +99,10 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
 });
 
 app.delete("/api/v1/content", userMiddleware, async (req, res) => {
-    const contentId = req.body.contentId;
+    const link = req.body.link;
 
-    await contentModel.deleteMany({
-        contentId,
-        // @ts-ignore
-        userId: req.userId
+    await contentModel.deleteOne({
+        link,
     })
 
     res.json({

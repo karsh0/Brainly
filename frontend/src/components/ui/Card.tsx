@@ -1,5 +1,8 @@
 import { ShareIcon } from "../Icons/ShareIcon"
 import { DocumentIcon } from "../Icons/DocumentIcon"
+import DeleteIcon from "../Icons/DeleteIcon"
+import axios from "axios"
+import { BACKEND_URL } from "../../config"
 
 interface CardInterface{
     title: String,
@@ -8,6 +11,18 @@ interface CardInterface{
 }
 
 export const Card = ({link, title, type}: CardInterface) => {
+
+    async function deleteCard(){
+        await axios.delete(`${BACKEND_URL}/api/v1/content`,{
+            headers:{
+                "Authorization": localStorage.getItem('token')
+            },data:{
+                link
+            }
+        })
+        alert("post deleted")
+    }
+
     return(
         <div>
         <div className="max-w-72 rounded-xl border border-gray-300 p-2 min-h-48">
@@ -17,8 +32,22 @@ export const Card = ({link, title, type}: CardInterface) => {
                     <p className="text-xl text-md">{title}</p>
                 </div>
                 <div className="flex gap-2 items-center">
+                    <div onClick={async()=>{
+                      const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`,{
+                        share: true
+                      },{
+                        headers:{
+                          "Authorization": localStorage.getItem('token')
+                        }
+                      })
+                      const shareUrl = response.data.hash
+                      alert(`http://localhost:5173/brain/share/${shareUrl}`)
+                    }}> 
                     <ShareIcon/>
-                    <ShareIcon/>
+                    </div>
+                    <div onClick={deleteCard}>
+                    <DeleteIcon/>
+                    </div>
                 </div>
             </div>
 

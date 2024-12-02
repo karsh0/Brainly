@@ -6,6 +6,8 @@ import { Card } from "../components/ui/Card"
 import { Sidebar } from "../components/ui/Sidebar"
 import {CreateContentModal} from "./CreateContentModal"
 import { useContents } from "../hooks/useContents"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 
 export const Homepage = () =>{
@@ -22,7 +24,17 @@ export const Homepage = () =>{
       <div className="flex justify-between pb-5">
         <h1 className="text-3xl text-bold">All Notes</h1>
         <div className="flex gap-2">
-        <Button startIcon={<ShareIcon />} size="md" title={"Share brain"} variant={"secondary"} />
+        <Button onClick={async()=>{
+          const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`,{
+            share: true
+          },{
+            headers:{
+              "Authorization": localStorage.getItem('token')
+            }
+          })
+          const shareUrl = response.data.hash
+          alert(shareUrl)
+        }} startIcon={<ShareIcon />} size="md" title={"Share brain"} variant={"secondary"} />
 
         <Button startIcon={<PlusIcon />} onClick={() =>{
           setModalOpen(true)
