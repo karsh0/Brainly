@@ -5,8 +5,10 @@ interface ButtonInterface{
     startIcon? : ReactElement,
     endIcon? : ReactElement,
     title: String,
-    variant:"primary" | "secondary"
-    onClick?: () => void
+    variant:"primary" | "secondary",
+    onClick?: () => void,
+    fullWidth?: boolean,
+    loading?: boolean
 }
 
 
@@ -22,11 +24,11 @@ const variantStyles = {
 }
 
 
-export const Button = ({size, startIcon, title, variant, onClick}: ButtonInterface) =>{
+export const Button = ({size, startIcon, title, variant, onClick, fullWidth, loading}: ButtonInterface) =>{
     const startIconWithProps = startIcon ? React.cloneElement(startIcon, {size}) : null;
 
-    return  <button onClick={onClick} className={sizeStyles[size] + " " + variantStyles[variant] }>
-    <div className="flex items-center">
+    return  <button onClick={onClick} className={sizeStyles[size] + " " + variantStyles[variant] + `${fullWidth ? " w-full" : ""}`+ `${loading ? ' opacity-45' : ""}`  } disabled={loading}>
+    <div className="flex items-center justify-center">
         {startIconWithProps}
         <div className="pl-2 pr-2">
             {title}
