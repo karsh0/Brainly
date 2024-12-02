@@ -5,12 +5,12 @@ import { Button } from "../components/ui/Button"
 import { Card } from "../components/ui/Card"
 import { Sidebar } from "../components/ui/Sidebar"
 import {CreateContentModal} from "./CreateContentModal"
-
+import { useContents } from "../hooks/useContents"
 
 
 export const Homepage = () =>{
   const [modalOpen, setModalOpen] = useState(false)
-
+  const contents = useContents();
 
   return (    
     <div className="flex text-gray-700">
@@ -29,9 +29,8 @@ export const Homepage = () =>{
         }} size="md" title={"Add content"} variant={"primary"}/>
         </div>
         </div>
-        <div className="flex gap-2">
-        <Card title="Youtube post" link={"https://www.youtube.com/watch?v=Tuw8hxrFBH8"} type="youtube"/>
-        <Card title="Twitter post" link={"https://x.com/Karan_tw/status/1857843478719508663"} type="twitter"/>
+        <div className="flex gap-2 flex-wrap">
+        {contents.map(({title, type, link}) =>  <Card title={title} link={link} type={type}/>)}
         </div>
     </div>
   </div>

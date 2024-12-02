@@ -24,5 +24,3 @@ export const userMiddleware = (req: Request, res: Response, next: NextFunction) 
         })
     }
 }
-
-// override the types of the express request object

@@ -65,11 +65,12 @@ app.post("/api/v1/signin", async (req, res) => {
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
     const validatedData = contentSchema.parse(req.body);
-    const { type, link } = validatedData;
+    const { title, link, type} = validatedData;
 
     await contentModel.create({
-        type,
+        title,
         link,
+        type,
         //@ts-ignore
         userId: req.userId,
         tags: []
