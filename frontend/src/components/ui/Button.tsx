@@ -5,7 +5,7 @@ interface ButtonInterface{
     startIcon? : ReactElement,
     endIcon? : ReactElement,
     title: String,
-    variant:"primary" | "secondary",
+    variant:"primary" | "secondary" | "danger",
     onClick?: () => void,
     fullWidth?: boolean,
     loading?: boolean
@@ -21,6 +21,7 @@ const sizeStyles = {
 const variantStyles = {
     "primary": "bg-[#5046e5] text-white",
     "secondary": "bg-[#e0e7ff] text-purple-600",
+    "danger" : "bg-red-500 text-white"
 }
 
 

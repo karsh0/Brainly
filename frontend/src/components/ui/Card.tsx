@@ -3,6 +3,7 @@ import { DocumentIcon } from "../Icons/DocumentIcon"
 import DeleteIcon from "../Icons/DeleteIcon"
 import axios from "axios"
 import { BACKEND_URL } from "../../config"
+import { VideoIcon } from "../Icons/VideoIcon"
 
 interface CardInterface{
     title: String,
@@ -25,10 +26,10 @@ export const Card = ({link, title, type}: CardInterface) => {
 
     return(
         <div>
-        <div className="max-w-72 rounded-xl border border-gray-300 p-2 min-h-48">
+        <div className="max-w-72 rounded-xl border border-gray-300 p-3 min-h-48">
             <div className="flex justify-between">
                 <div className="flex gap-2 items-center"> 
-                    <DocumentIcon/>
+                    {type == "youtube" ? <VideoIcon/> : <DocumentIcon/>}
                     <p className="text-xl text-md">{title}</p>
                 </div>
                 <div className="flex gap-2 items-center">
