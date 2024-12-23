@@ -7,6 +7,7 @@ export const userSchema = z.object({
 
 export const contentSchema = z.object({
     title: z.string(),
+    content: z.string(),
     type: z.string(),
     link: z.string(),
 })

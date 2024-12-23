@@ -9,78 +9,97 @@ enum ContentType {
     Youtube = "Youtube",
     Twitter = "Twitter",
     Link = "Link",
-    Document = "Document"
+    Document = "Document",
 }
 
-export function CreateContentModal({open, onClose}: {open:boolean, onClose: ()=> void} ) {
-    const titleRef = useRef<HTMLInputElement>()
-    const linkRef = useRef<HTMLInputElement>()
+export function CreateContentModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+    const titleRef = useRef<HTMLInputElement>(null);
+    const linkRef = useRef<HTMLInputElement>(null);
+    const tagsRef = useRef<HTMLInputElement>(null);
+    const contentRef = useRef<HTMLTextAreaElement>(null);
+    const [type, setType] = useState<ContentType>(ContentType.Youtube);
+    const [tags, setTags] = useState(["100x"])
 
-    const [type, setType] = useState(ContentType.Youtube)
-
-    async function handleAddContent(){
-        const title = titleRef.current?.value
-        const link = linkRef.current?.value
-        
-        await axios.post(BACKEND_URL + "/api/v1/content" ,{
-            title, link, type
-        },{
-            headers:{
-                "Authorization": localStorage.getItem('token')
-            }
-        })
-        onClose()
+    function addTags(e: any){
+        if(e.key == "Enter"){
+            setTags([...tags, tagsRef.current.value])
+        }
     }
-  return (
-    <div>
-    {open && 
-    <div>
-    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center"></div>
-    <div className="w-screen h-screen bg-gray-600 bg-opacity-60 opacity-100 fixed top-0 left-0 flex justify-center">
-        <div className="flex flex-col justify-center opacity-100 w-96">
-            <span className="bg-white p-6 rounded-md w-full cursor-pointer">
-                <div className="flex justify-between pb-2">
-                <h3 className="text-[#676767] text-xl font-semibold">Create New Content</h3>
-                    <div onClick={onClose}>
-                        <CrossIcon/>
+
+    async function handleAddContent() {
+        const title = titleRef.current?.value;
+        const link = linkRef.current?.value;
+        const content = contentRef.current?.value;
+        console.log(content)
+        try {
+            await axios.post(
+                `${BACKEND_URL}/api/v1/content`,
+                { title, link, tags, type, content },
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token"),
+                    },
+                }
+            );
+            onClose();
+        } catch (error) {
+            console.error("Error adding content:", error);
+        }
+    }
+
+    return (
+        open && (
+            <div>
+                <div className="w-screen h-screen bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-md w-96">
+                        <div className="flex justify-between pb-2">
+                            <h3 className="text-[#676767] text-xl font-semibold">Create New Content</h3>
+                            <div onClick={onClose} className="cursor-pointer">
+                                <CrossIcon />
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <label className="block text-[#676767] mb-2">Title</label>
+                                <Input reference={titleRef} placeholder="15 Character limit" />
+                            </div>
+                            <div>
+                                <label className="block text-[#676767] mb-2">Link (Optional)</label>
+                                <Input reference={linkRef} placeholder="Enter URL" />
+                            </div>
+                            <div>
+                                <label className="block text-[#676767] mb-2">Type</label>
+                                <select
+                                    className="w-full border p-2 rounded-lg"
+                                    value={type}
+                                    onChange={(e) => setType(e.target.value as ContentType)}
+                                >
+                                    <option value={ContentType.Youtube}>Video</option>
+                                    <option value={ContentType.Twitter}>Tweet</option>
+                                    <option value={ContentType.Link}>Link</option>
+                                    <option value={ContentType.Document}>Document</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-[#676767] mb-2">Tags</label>
+                                <Input reference={tagsRef} placeholder="Add Tags" onKeyUp={addTags} />
+                            </div>
+                            <div>
+                                <label className="block text-[#676767] mb-2">Content (Optional)</label>
+                                <textarea
+                                    className="border-gray-500 border w-full rounded p-2"
+                                    rows={4}
+                                    ref={contentRef}
+                                    placeholder="Enter content details"
+                                ></textarea>
+                            </div>
+                            <div className="flex justify-center">
+                                <Button onClick={handleAddContent} size="md" variant="primary" title="Submit" fullWidth />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            <div className="flex flex-col justify-start gap-4">
-                <div>
-                <label className="block text-[#676767] mb-2">Title</label>
-                <Input reference={titleRef} placeholder={"15 Character limit"}/>
-                </div>
-                <div>
-                <label className="block text-[#676767] mb-2">Link (Optional)</label>
-                <Input reference={linkRef} placeholder={"Enter URL"}/>
-                </div>
-                
-                <div>
-                    <label className="block text-[#676767] mb-2">Type</label>
-                    <select className="w-full border p-2 rounded-lg">
-                        <option value="Video" onClick={(e)=> setType(e.target.value)}>Video</option>
-                        <option value="Tweet" onClick={(e)=> setType(e.target.value)}>Tweet</option>
-                        <option value="Link" onClick={(e)=> setType(e.target.value)}>Link</option>
-                        <option value="Document" onClick={(e)=> setType(e.target.value)}>Document</option>
-                    </select>
-                </div>
-                <div>
-                <label className="block text-[#676767] mb-2">Tags</label>
-                <Input reference={linkRef} placeholder={"Add a Tags"}/>
-                </div>
-                <div>
-                <label className="block text-[#676767] mb-2">Content (Optional)</label>
-                    <textarea className="border-gray-500 border w-full rounded p-2" rows={4} name="textarea" placeholder="Enter content details"></textarea>
-                </div>
-                <div className="flex justify-center">
-                <Button onClick={handleAddContent} size={"md"} variant={"primary"} title={"Submit"} fullWidth={true}/>
-                </div>
             </div>
-            </span>
-        </div>
-    </div>
-    </div>}
-    </div>
-  )
+        )
+    );
 }
-

@@ -16,6 +16,7 @@ export const Homepage = () =>{
 
   return (    
     <div className="flex text-gray-700">
+      {JSON.stringify(contents)}
     <CreateContentModal open={modalOpen} onClose={() =>{
       setModalOpen(false)
     }}/>
@@ -42,7 +43,7 @@ export const Homepage = () =>{
         </div>
         </div>
         <div className="flex gap-2 flex-wrap">
-        {contents.map(({title, type, link}) =>  <Card title={title} link={link} type={type}/>)}
+        {contents.map(({title, content, type, link}) =>  <Card key={link} title={title} content={content} link={link} type={type}/>)}
         </div>
     </div>
   </div>

@@ -14,7 +14,8 @@ const contentSchema = new Schema({
     link: String,
     type: String,
     title: String,
-    tags: [{type: Schema.ObjectId, ref: "Tag"}],
+    content: String,
+    tags: [{type: String, ref: "Tag"}],
     userId: {type: Schema.ObjectId, ref:"User", required: true}
 })
 
