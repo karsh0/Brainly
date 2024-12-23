@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 export const userSchema = z.object({
     username: z.string().min(3),
@@ -10,4 +10,5 @@ export const contentSchema = z.object({
     content: z.string(),
     type: z.string(),
     link: z.string(),
+    tags: z.any()
 })

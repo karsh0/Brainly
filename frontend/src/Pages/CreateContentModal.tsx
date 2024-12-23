@@ -18,19 +18,23 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
     const tagsRef = useRef<HTMLInputElement>(null);
     const contentRef = useRef<HTMLTextAreaElement>(null);
     const [type, setType] = useState<ContentType>(ContentType.Youtube);
-    const [tags, setTags] = useState(["100x"])
+    const [tags, setTags] = useState([])
 
-    function addTags(e: any){
-        if(e.key == "Enter"){
-            setTags([...tags, tagsRef.current.value])
+    const addTags = (event) => {
+        if (event.key === "Enter") {
+            const newTag = tagsRef.current.value.trim(); 
+            if (newTag && !tags.includes(newTag)) {    
+                setTags([...tags, newTag]);
+            }
+            tagsRef.current.value = ""; 
         }
-    }
+    };
+    
 
     async function handleAddContent() {
         const title = titleRef.current?.value;
         const link = linkRef.current?.value;
         const content = contentRef.current?.value;
-        console.log(content)
         try {
             await axios.post(
                 `${BACKEND_URL}/api/v1/content`,
@@ -83,6 +87,9 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
                             <div>
                                 <label className="block text-[#676767] mb-2">Tags</label>
                                 <Input reference={tagsRef} placeholder="Add Tags" onKeyUp={addTags} />
+                                <div className="flex flex-wrap p-1 gap-1">
+                                {tags.map((tag)=> <div className="flex items-center gap-1 bg-gray-100 rounded-full px-3 py-1 text-black mx-1"><span>{tag}</span><CrossIcon size="size-4"/></div>)}
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-[#676767] mb-2">Content (Optional)</label>

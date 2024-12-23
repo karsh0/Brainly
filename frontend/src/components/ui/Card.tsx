@@ -9,10 +9,11 @@ interface CardInterface{
     title: String,
     content: String,
     link: String,
+    tags: [string],
     type: "Youtube" | "Twitter",
 }
 
-export const Card = ({link, title, type, content}: CardInterface) => {
+export const Card = ({link, title, type, content, tags}: CardInterface) => {
 
     async function deleteCard(){
         await axios.delete(`${BACKEND_URL}/api/v1/content`,{
@@ -59,6 +60,9 @@ export const Card = ({link, title, type, content}: CardInterface) => {
                   <a href={link.replace('x.com', 'twitter.com')}></a> 
                 </blockquote>}            
             </div>
+           <div className="flex flex-wrap p-1 gap-1">
+                {tags.map((tag)=> <div className="flex items-center gap-1 bg-gray-100 rounded-full px-3 py-1 text-black mx-1"><span>{tag}</span></div>)}
+                </div>
             <div className="text-xl text-black font-semibold">
                 {content}
             </div>

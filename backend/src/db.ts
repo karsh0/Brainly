@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose"
-import { any, string } from "zod"
-
-mongoose.connect('mongodb+srv://admin:sdWrBsXuYHdxK3sb@cluster0.plktz.mongodb.net/Brainly')
+require('dotenv').config()
+mongoose.connect(process.env.MONGO_URI || "")
 
 const userSchema = new Schema({
     username: {type:String, unique:true},
