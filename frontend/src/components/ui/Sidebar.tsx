@@ -5,6 +5,7 @@ import { TagsIcon } from "../Icons/TagsIcon"
 import { TweetIcon } from "../Icons/TweetIcon"
 import { VideoIcon } from "../Icons/VideoIcon"
 import { Button } from "./Button"
+import { DocumentIcon } from "../Icons/DocumentIcon"
 
 
 export const Sidebar = () =>{
@@ -18,15 +19,15 @@ export const Sidebar = () =>{
             <p className="text:md lg:text-lg text-gray-700 hidden md:block"> Tweets</p>
             </div>
             <div className="flex gap-4 items-center cursor-pointer">
-            <VideoIcon size={"lg"}/>
+            <VideoIcon />
             <p className="text:md lg:text-lg text-gray-700 hidden md:block"> Video</p>
             </div>
             <div className="flex gap-4 items-center cursor-pointer">
-            <TweetIcon size={"lg"}/>
+            <DocumentIcon/>
             <p className="text:md lg:text-lg text-gray-700 hidden md:block"> Documents</p>
             </div>
             <div className="flex gap-4 items-center cursor-pointer">
-            <LinkIcon size={"lg"}/>
+            <LinkIcon />
             <p className="text:md lg:text-lg text-gray-700 hidden md:block"> Links</p>
             </div>
             <div className="flex gap-4 items-center cursor-pointer">

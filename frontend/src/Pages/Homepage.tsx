@@ -23,10 +23,18 @@ export const Homepage = () => {
       .then((response) => setContents(response.data.content));
   }, [modalOpen]);
 
-  const handleDelete = (link) => {
-    // Update the contents by filtering out the deleted card
+
+  interface contentProps{
+      link: String,
+      type: String,
+      title: String,
+      content: String,
+      tags:[string],
+  }
+
+  const handleDelete = (link: any) => {
     setContents((prevContents) =>
-      prevContents.filter((content) => content.link !== link)
+      prevContents.filter((content: contentProps) => content.link !== link)
     );
   };
 

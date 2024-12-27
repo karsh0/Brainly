@@ -15,6 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
+app.get("/api/v1/", (req,res)=>{
+    res.send("Backend is hosted!")
+})
+
 app.post("/api/v1/signup", async (req, res) => {
     // TODO: zod validation , hash the password
 

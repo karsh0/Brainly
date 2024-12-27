@@ -18,15 +18,17 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
     const tagsRef = useRef<HTMLInputElement>(null);
     const contentRef = useRef<HTMLTextAreaElement>(null);
     const [type, setType] = useState<ContentType>(ContentType.Youtube);
-    const [tags, setTags] = useState([])
+    const [tags, setTags] = useState<string[]>([])
 
-    const addTags = (event) => {
+    const addTags = (event: any) => {
         if (event.key === "Enter") {
-            const newTag = tagsRef.current.value.trim(); 
+            const newTag = tagsRef.current?.value.trim(); 
             if (newTag && !tags.includes(newTag)) {    
                 setTags([...tags, newTag]);
             }
+            if(tagsRef.current){
             tagsRef.current.value = ""; 
+            }
         }
     };
     

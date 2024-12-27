@@ -25,7 +25,7 @@ export const Card = ({ link, title, type, content, tags, onDelete }: CardInterfa
             link,
           },
         });
-        onDelete(link); // Call the handler to update the state in Homepage
+        onDelete(link); 
       } catch (error) {
         console.error("Error deleting the post", error);
         alert("Failed to delete post");
