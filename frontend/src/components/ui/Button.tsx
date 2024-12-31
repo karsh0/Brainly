@@ -22,7 +22,7 @@ const variantStyles = {
     "primary": "bg-[#5046e5] text-white",
     "danger" : "bg-red-500 text-white",
     "dark" : "bg-black text-white",
-    "secondary": "bg-[#5046e5] text-white",
+    "secondary": "bg-white text-black",
 }
 
 
