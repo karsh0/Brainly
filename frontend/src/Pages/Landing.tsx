@@ -31,7 +31,7 @@ export function Landing(){
         <div className="w-full flex gap-4 justify-end px-10 pb-2 md:pb-5">
             <div>
                 <a href="https://github.com/karsh0/Brainly" target="_blank">
-                <img src={`${toggle ? "https://cdn-icons-png.flaticon.com/128/15452/15452650.png" :"https://cdn-icons-png.flaticon.com/128/25/25657.png"}`} className="w-6 md:w-8" />
+                <img src={`${toggle ? "https://cdn-icons-png.flaticon.com/128/11378/11378534.png" :"https://cdn-icons-png.flaticon.com/128/25/25657.png"}`} className="w-6 md:w-8" />
                 </a>
             </div>
             <div>
