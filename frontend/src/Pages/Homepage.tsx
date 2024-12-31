@@ -75,7 +75,7 @@ export const Homepage = () => {
               startIcon={<ShareIcon />}
               size="md"
               title={"Share brain"}
-              variant={"secondary"}
+              variant={"primary"}
             />
 
             <Button
