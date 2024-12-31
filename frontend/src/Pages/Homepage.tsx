@@ -39,15 +39,20 @@ export const Homepage = () => {
   };
 
   return (
-    <div className="flex text-gray-700">
+    <div className="flex text-black h-screen">
       <CreateContentModal
         open={modalOpen}
         onClose={() => {
           setModalOpen(false);
         }}
       />
+      <div className="hidden">
+        <img src="https://cdn-icons-png.flaticon.com/128/7710/7710488.png" className="w-6 absolute top-3 left-6" alt="" />
+      </div>
+      <div className="hidden md:flex w-[20%] h-full">
       <Sidebar />
-      <div className="max-w-full w-full h-full p-10">
+      </div>
+      <div className="w-full h-full p-8 md:p-10">
         <div className="flex flex-col sm:flex-row justify-between pb-5">
           <h1 className="text-3xl text-bold">All Notes</h1>
           <div className="flex gap-2">

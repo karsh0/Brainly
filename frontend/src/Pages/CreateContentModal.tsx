@@ -47,6 +47,7 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
                     },
                 }
             );
+            setTags([]);
             onClose();
         } catch (error) {
             console.error("Error adding content:", error);
@@ -59,7 +60,7 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
                 <div className="w-screen h-screen bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-md w-96">
                         <div className="flex justify-between pb-2">
-                            <h3 className="text-[#676767] text-xl font-semibold">Create New Content</h3>
+                            <h3 className="text-black text-xl font-semibold">Create New Content</h3>
                             <div onClick={onClose} className="cursor-pointer">
                                 <CrossIcon />
                             </div>
@@ -90,7 +91,15 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
                                 <label className="block text-[#676767] mb-2">Tags</label>
                                 <Input reference={tagsRef} placeholder="Add Tags" onKeyUp={addTags} />
                                 <div className="flex flex-wrap p-1 gap-1">
-                                {tags.map((tag)=> <div className="flex items-center gap-1 bg-gray-100 rounded-full px-3 py-1 text-black mx-1"><span>{tag}</span><CrossIcon size="size-4"/></div>)}
+                                {tags.map((tag, index)=> <div className="flex items-center gap-1 bg-gray-100 rounded-full px-3 py-1 text-black mx-1"><span>{tag}</span>
+                                <div onClick={()=>{
+                                     const newTags = [...tags];
+                                     newTags.splice(index, 1);
+                                     setTags(newTags);
+                                }}>
+                                <CrossIcon size="size-4"/>
+                                </div>
+                                </div>)}
                                 </div>
                             </div>
                             <div>
