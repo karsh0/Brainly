@@ -103,7 +103,7 @@ export function CreateContentModal({ open, onClose }: { open: boolean; onClose: 
                                 ></textarea>
                             </div>
                             <div className="flex justify-center">
-                                <Button onClick={handleAddContent} size="md" variant="primary" title="Submit" fullWidth />
+                                <Button onClick={handleAddContent} size="md" variant="dark" title="Submit" fullWidth />
                             </div>
                         </div>
                     </div>

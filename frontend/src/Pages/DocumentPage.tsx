@@ -8,6 +8,9 @@ export function DocumentPage(){
 
     async function handleDelete(link: any){
         const res = await axios.delete(`${BACKEND_URL}/api/v1/content`,{
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            },
             data:{
                 link
             }

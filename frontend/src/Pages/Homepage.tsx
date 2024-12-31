@@ -4,7 +4,7 @@ import { ShareIcon } from "../components/Icons/ShareIcon"
 import { Button } from "../components/ui/Button"
 import { Card } from "../components/ui/Card"
 import { Sidebar } from "../components/ui/Sidebar"
-import {CreateContentModal} from "./CreateContentModal"
+import { CreateContentModal } from "./CreateContentModal"
 import { BACKEND_URL } from "../config"
 import axios from "axios"
 
@@ -80,7 +80,7 @@ export const Homepage = () => {
               }}
               size="md"
               title={"Add content"}
-              variant={"primary"}
+              variant={"dark"}
             />
           </div>
         </div>
