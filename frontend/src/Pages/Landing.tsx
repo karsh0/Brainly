@@ -1,9 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../components/ui/Button";
+import { Button } from "@/components/ui/button";
 import BrainlyImage from "../assets/brainly-image.png" 
-import { LightMode } from "../components/Icons/LightMode";
 import { useState } from "react";
-import { DarkMode } from "../components/Icons/DarkMode";
+import { Moon, SunDim } from "lucide-react";
 
 export function Landing(){
     const navigate = useNavigate()
@@ -13,12 +12,12 @@ export function Landing(){
             <p className="text-xl md:text-2xl font-bold ">100xBrainly</p>
             <div className="flex gap-4 md:gap-8 items-center"> 
             {toggle ? <div onClick={()=>setToggle(false)}>
-            <DarkMode/>
+            <Moon/>
             </div> : <div onClick={()=>setToggle(true)}>
-            <LightMode/>
+            <SunDim/>
             </div>}
             <div className="text:md md:text-xl font-medium"><Link to={'/signin'}>Signin</Link></div> 
-            <Button title={'Register'} size="md" variant={toggle ? "secondary" : "dark"} onClick={()=> navigate('/signup')}/>
+            <Button title={'Register'} onClick={()=> navigate('/signup')}/>
             </div>
         </div>
         <div className="w-full flex justify-center mt-20">

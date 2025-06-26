@@ -1,6 +1,6 @@
 import { useRef } from "react"
-import { Button } from "../components/ui/Button"
-import { Input } from "../components/ui/Input"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { useNavigate } from "react-router-dom"
@@ -28,10 +28,10 @@ export const Signup = () =>{
                     Signup
                 </div>
             <div className="flex flex-col gap-4">
-                <Input reference={usernameRef} placeholder={"Username"}/>
-                <Input reference={passwordRef} placeholder={"Password"}/>
+                <Input placeholder={"Username"}/>
+                <Input placeholder={"Password"}/>
                 <div className="flex justify-center">
-                <Button onClick={handleSignup} loading={false} size={"md"} variant={"dark"} title={"Submit"} fullWidth={true}/>
+                <Button onClick={handleSignup} title={"Submit"}/>
                 </div>
             </div>
             </span>

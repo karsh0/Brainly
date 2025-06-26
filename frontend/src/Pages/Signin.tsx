@@ -1,13 +1,13 @@
 import { useRef } from "react"
-import { Button } from "../components/ui/Button"
-import { Input } from "../components/ui/Input"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { useNavigate } from "react-router-dom"
 
 export const Signin = () =>{
-    const usernameRef = useRef<HTMLInputElement>()
-    const passwordRef = useRef<HTMLInputElement>()
+    const usernameRef = useRef<HTMLInputElement | null>(null)
+    const passwordRef = useRef<HTMLInputElement | null>(null)
     const navigate = useNavigate()
 
     async function handleSignin(){
@@ -30,10 +30,11 @@ export const Signin = () =>{
                     Signin
                 </div>
             <div className="flex flex-col gap-4">
-                <Input reference={usernameRef} placeholder={"Username"}/>
-                <Input reference={passwordRef} placeholder={"Password"}/>
+                <Input ref={usernameRef} placeholder={"Username"}/>
+                <Input ref={passwordRef} placeholder={"Password"}/>
                 <div className="flex justify-center">
-                <Button onClick={handleSignin} loading={false} size={"md"} variant={"dark"} title={"Submit"} fullWidth={true}/>
+                <Button onClick={handleSignin}>
+                    Signin</Button>
                 </div>
             </div>
             </span>
