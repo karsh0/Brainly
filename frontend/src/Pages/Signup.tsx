@@ -30,7 +30,6 @@ export const Signup = () => {
 
   return (
     <div className="w-screen h-screen bg-gradient-to-br from-zinc-900 via-black to-zinc-800 flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Background Animated Circles */}
       <motion.div
         className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] rounded-full bg-purple-500 opacity-30 blur-3xl"
         animate={{ x: [0, 100, 0], y: [0, 100, 0] }}

@@ -58,7 +58,7 @@ export function Landing() {
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.5, duration: 0.6 }}
 >
-  Second Brain is an all-in-one Notion system that tracks your{" "}
+  Neuron is an all-in-one Notion system that tracks your{" "}
   <span className="text-indigo-400 font-semibold">
     <Typewriter
       words={['goals.', 'projects.', 'notes.', 'tasks.', 'thoughts.']}
