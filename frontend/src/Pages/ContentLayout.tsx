@@ -1,15 +1,14 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ContentType, CreateContentModal } from "./CreateContentModal";
 import { BACKEND_URL } from "../config";
 import { ContentCard } from "./ContentCard";
 import { Navbar } from "@/components/Navbar";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/Sidebar";
-import { motion } from "framer-motion";
-import { Layout } from "./Layout";
+import { useType } from "@/hooks/type-provider";
+import { ContentType } from "@/Types/types";
+import { CreateContentModal } from "./CreateContentModal";
+import { motion } from "framer-motion"
 
 interface contentProps {
   link: string;
@@ -22,6 +21,11 @@ interface contentProps {
 export const ContentLayout = ({ contents }: { contents: contentProps[] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { selectedType } = useType()
+
+  if(selectedType != ContentType.Content){
+    contents = contents.filter(c => c.type === selectedType)
+  }
 
   const filteredContents = useMemo(() => {
     return searchQuery
@@ -50,7 +54,6 @@ export const ContentLayout = ({ contents }: { contents: contentProps[] }) => {
   );
 
   return (
-    <Layout>
       <div className="w-full min-h-screen bg-muted/40 text-black dark:text-white">
         <Navbar />
         <CreateContentModal
@@ -75,9 +78,9 @@ export const ContentLayout = ({ contents }: { contents: contentProps[] }) => {
           </div>
 
           <div className="flex flex-wrap gap-4">
-            {filteredContents.map(({ title, content, type, link, tags }) => (
+            {filteredContents.map(({ title, content, type, link, tags }, index) => (
               <motion.div
-                key={link}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
@@ -95,6 +98,5 @@ export const ContentLayout = ({ contents }: { contents: contentProps[] }) => {
           </div>
         </main>
       </div>
-    </Layout>
   );
 };

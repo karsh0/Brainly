@@ -17,41 +17,47 @@ import {
   TwitterIcon,
   Link2,
 } from "lucide-react";
+import { ContentType } from "@/Types/types";
+import { useState } from "react";
+import { useType } from "@/hooks/type-provider";
 
 const items = [
   {
     title: "All Content",
     url: "/contents",
     icon: Home,
-    key: "content",
+    type: ContentType.Content,
   },
   {
     title: "Document",
     url: "/document",
     icon: Package,
-    key: "document",
+    type: ContentType.Document,
   },
   {
     title: "Links",
     url: "/links",
     icon: Link2,
-    key: "link",
+    type: ContentType.Link,
   },
   {
     title: "Youtube",
     url: "/youtube",
     icon: YoutubeIcon,
-    key: "youtube",
+    type: ContentType.Youtube,
   },
   {
     title: "Tweet",
     url: "/tweet",
     icon: TwitterIcon,
-    key: "tweet",
+    type: ContentType.Twitter,
   },
 ];
 
 export function AppSidebar({ counts }: { counts: Record<string, number> }) {
+
+  const { selectedType, setSelectedType } = useType()
+
   return (
     <Sidebar className="dark:border-gray-600">
       <SidebarContent className="px-2">
@@ -64,10 +70,16 @@ export function AppSidebar({ counts }: { counts: Record<string, number> }) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
-                    className="hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white transition duration-200 ease-out py-6 rounded-md"
+                    className={`py-6 rounded-md transition-colors duration-200 ${selectedType === item.type
+                        ? "bg-black text-white dark:bg-white dark:text-black"
+                        : "bg-white text-black hover:bg-gray-200 dark:bg-zinc-900 dark:text-white dark:hover:text-black dark:hover:bg-gray-200"
+                      }`}
                     asChild
                   >
-                    <Link to={item.url} className="flex justify-between items-center w-full">
+
+                    <div className="flex justify-between items-center w-full" onClick={() => {
+                      setSelectedType(item.type)
+                    }}>
                       <div className="flex gap-3 items-center">
                         <item.icon className="w-6 h-6" />
                         <span className="text-base font-medium">{item.title}</span>
@@ -76,9 +88,9 @@ export function AppSidebar({ counts }: { counts: Record<string, number> }) {
                         variant="secondary"
                         className="min-w-6 h-6 text-sm px-2 py-1 rounded-full flex items-center justify-center"
                       >
-                        {counts[item.key] || 0}
+                        {counts[item.type] || 0}
                       </Badge>
-                    </Link>
+                    </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

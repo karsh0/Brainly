@@ -14,13 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { ContentType } from "@/Types/types";
 
-export enum ContentType {
-  Youtube = "Youtube",
-  Twitter = "Twitter",
-  Link = "Link",
-  Document = "Document",
-}
 
 interface Props {
   open: boolean;
