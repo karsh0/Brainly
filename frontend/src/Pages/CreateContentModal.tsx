@@ -20,7 +20,7 @@ import { ContentType } from "@/Types/types";
 interface Props {
   open: boolean;
   onClose: () => void;
-  onContentAdded?: () => void; // ✅ Optional callback to refetch
+  onContentAdded?: () => void;
 }
 
 export function CreateContentModal({ open, onClose, onContentAdded }: Props) {
@@ -65,10 +65,8 @@ export function CreateContentModal({ open, onClose, onContentAdded }: Props) {
         }
       );
 
-      // ✅ Trigger refresh
       onContentAdded?.();
 
-      // ✅ Reset state
       setTags([]);
       titleRef.current!.value = "";
       linkRef.current!.value = "";

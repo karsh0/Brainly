@@ -8,7 +8,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
 import { Badge } from "./ui/badge";
 import {
   Home,
@@ -18,7 +17,6 @@ import {
   Link2,
 } from "lucide-react";
 import { ContentType } from "@/Types/types";
-import { useState } from "react";
 import { useType } from "@/hooks/type-provider";
 
 const items = [

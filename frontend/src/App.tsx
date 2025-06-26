@@ -3,7 +3,7 @@ import { Dashboard } from "./Pages/Dashboard"
 import { Signin } from "./Pages/Signin"
 import { Signup } from "./Pages/Signup"
 import { Landing } from "./Pages/Landing"
-import { ThemeProvider, useTheme } from "./hooks/theme-provider"
+import { ThemeProvider } from "./hooks/theme-provider"
 function App() {
 
 

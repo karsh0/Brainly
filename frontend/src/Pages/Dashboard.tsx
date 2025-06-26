@@ -3,7 +3,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { TypeProvider } from "@/hooks/type-provider";
 import { useContents } from "@/hooks/useContents";
 import { ContentType } from "@/Types/types";
-import React, { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ContentLayout } from "./ContentLayout";
 
 export function Dashboard() {
